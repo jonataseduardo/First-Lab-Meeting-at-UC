@@ -12,12 +12,14 @@
 \usepackage{xspace}
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
-\title{Metropolis}
-\subtitle{A modern beamer theme}
+\usepackage{bm}
+
+\title{Genetic load and efficacy of selection on admixed populations}
+\subtitle{A Diffusion Processes Approach}
 % \date{\today}
 \date{}
-\author{Matthias Vogelgesang}
-\institute{Center for modern beamer themes}
+\author{Jonatas Cesar}
+\institute{University of S\~ao Paulo \& University of Chicago}
 % \titlegraphic{\hfill\includegraphics[height=1.5cm]{logo.pdf}}
 
 \begin{document}
@@ -29,31 +31,36 @@
   \tableofcontents[hideallsubsections]
 \end{frame}
 
-\section{Introduction}
+\section{Quick Bio}
 
-\begin{frame}[fragile]{Metropolis}
+\begin{frame}{Statistical Mechanics of Interacting Bayesian Agents: Applications
+    to Moral Foundation Theory}
+  
+  \[
+    \bm \omega_i^{t + 1} = \bm \omega_i^{t} + 
+    \eta \bm \nabla 
+    \mathcal H (\bm \omega_i^t \cdot \bm x ^t, \bm \omega_j^t \cdot \bm x ^t)
+  \]
 
-  The \themename theme is a Beamer theme with minimal visual noise
-  inspired by the \href{https://github.com/hsrmbeamertheme/hsrmbeamertheme}{\textsc{hsrm} Beamer
-  Theme} by Benjamin Weiss.
-
-  Enable the theme by loading
-
-  \begin{verbatim}    \documentclass{beamer}
-    \usetheme{metropolis}\end{verbatim}
-
-  Note, that you have to have Mozilla's \emph{Fira Sans} font and XeTeX
-  installed to enjoy this wonderful typography.
-\end{frame}
-\begin{frame}[fragile]{Sections}
-  Sections group slides of the same topic
-
-  \begin{verbatim}    \section{Elements}\end{verbatim}
-
-  for which \themename provides a nice progress indicator \ldots
+  \includegraphics[width=0.45\textwidth]{./Figures/mf_usa}
+  \hspace{5pt}
+  \includegraphics[width=0.45\textwidth]{./Figures/beta_tight.pdf}
 \end{frame}
 
-\section{Titleformats}
+\begin{frame}{SUVREL: Supervised Variational Relevance Learning}
+
+	\begin{alertblock}{Objective}
+  Learning a metric tensor $g_{\mu\nu}$ on the feature space that minimizes
+  intra-groups distances and maximize inter-groups distances. 
+	\end{alertblock}
+  \[
+    E = \sum_{intra(i,j)} d_{ij} - \gamma \sum_{iter(i,j)} d_{ij}
+  \]
+
+  \includegraphics[width=\textwidth]{./Figures/suvrel_image.png}
+\end{frame}
+
+\section{Recent Projects on Popgen}
 
 \begin{frame}{Metropolis titleformats}
 	\themename supports 4 different titleformats:
@@ -67,7 +74,7 @@
 \end{frame}
 
 {
-    \metroset{titleformat frame=smallcaps}
+\metroset{titleformat frame=smallcaps}
 \begin{frame}{Small caps}
 	This frame uses the \texttt{smallcaps} titleformat.
 

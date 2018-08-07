@@ -29,3 +29,5 @@ sub mpost {
   popd();
   return $return;
 }
+
+$pdflatex = 'xelatex %O %S'
