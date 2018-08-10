@@ -13,6 +13,12 @@
 \newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
 
 \usepackage{bm}
+\usepackage{amsmath,amssymb}
+\usepackage{mathtools}
+\newcommand{\del}[1]{\ensuremath{\frac{\partial}{\partial #1}}}
+\newcommand{\dell}[1]{\ensuremath{\frac{\partial^2}{\partial #1^2}}}
+
+\def\Put(#1,#2)#3{\leavevmode\makebox(0,0){\put(#1,#2){#3}}}
 
 \title{Genetic load and efficacy of selection on admixed populations}
 \subtitle{A Diffusion Processes Approach}
@@ -63,7 +69,7 @@
   \[
     E = \sum_{intra(i,j)} d_{ij} - \gamma \sum_{iter(i,j)} d_{ij}, 
   \]
-  $d_{ij}$ are defined as a quadratic distance in the new space $X' = G X$ 
+  $d_{ij}$ is defined as a quadratic distance in the new space $X' = G X$ 
 
   \includegraphics[width=\textwidth]{./Figures/suvrel_image.png}
   \let\thefootnote\relax\footnote{M. Boareto, J. Cesar, V.B. Leite and
@@ -148,7 +154,7 @@
     to the theoretical "perfectly adapted" genotype.
   \end{alertblock}
   \[
-    L = \frac{W_{max} - W_{mean}}{W_{max}}
+    L = \frac{W_{max} - \overline W}{W_{max}}
   \]
   Causes:
   \begin{itemize}
@@ -160,10 +166,81 @@
 \end{frame}
 
 \begin{frame}{Equilibrium Rationale}
+
 \begin{minipage}{0.7\textwidth}
+  \centering
+  \begin{footnotesize}
+    \begin{tabular}{cccc}
+      \hline
+      Genotype & aa & aA & AA \\
+      Frequency & $(1 - x) ^2$ & $2 x ( 1 - x)$ & $x^2$ \\
+      Average Fitness & 1 & $1 - h s$ & $1 - s$ \\
+      Mutation Rate & $ a \xrightleftharpoons[u]{v} A $ & \\
+      \hline
+    \end{tabular}
+
+  \[
+    \overline W = 1 - 2 hs x(1 -x) - s x^2
+  \]
+  \end{footnotesize}
   \includegraphics[width=\textwidth]{./Figures/Kimura_1963.png}
 \end{minipage}
 \end{frame}
 
+\begin{frame}{\normalsize There are differences in mutation load between human
+    populations?}
+  \vfill
+  \includegraphics[width=0.8\textwidth]{./Figures/McCoy_Akey2016.png}
+  \Put(-50,280){\includegraphics[width=0.4\textwidth]{./Figures/Henn_pnas_map.png}}
+  \let\thefootnote\relax\footnote{R. McCoy \& J. Akey, Pnas 2016 \\
+    \hspace{3pt} B. Henn, \textit{et.al} Pnas 2016}
+\end{frame}
+
+\begin{frame}{It depends}
+  \vfill
+  \includegraphics[width=\textwidth]{./Figures/Henn_pnas.png}
+  \let\thefootnote\relax\footnote{B. Henn \textit{et.al} Pnas 2016}
+\end{frame}
+
+\begin{frame}{\normalsize But there are differences in the present day efficacy
+    of selection} 
+  \vfill
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Figures/Gravel_efsel.png}
+  \let\thefootnote\relax\footnote{S. Gravel, Genetics 2016}
+\end{frame}
+
+\begin{frame}{Efficacy of Selection}
+  \begin{alertblock}{Definition}
+    The efficacy of selection is defined as the contribution of selection on
+    the population load change $\partial L / \partial t$.  
+  \end{alertblock}
+  \begin{align}
+    \dot W &= \dot W_u + \dot W_N + \dot W_s
+    \nonumber \\
+    &= s \big\{
+    \underbrace{2hu}_\text{mutation} + 
+    \underbrace{\frac{(1 - 2h)\pi_1}{4N}}_\text{drift} + 
+    \underbrace{\frac{s}{2}[h\Gamma_{1,h}+(1-2h)\Gamma_{2,h}}_\text{selection}]
+      \big\}
+  \end{align}
+\end{frame}
+
+\begin{frame}{Derivation outline}
+  \begin{block}{Diffusion Aproximation}
+    Let $\phi(x,t)dx$ the expected number of alleles with frequency between $x$
+    and $x + dx$ at time $t$.
+    \begin{align}
+      \del x \phi(x,t) & \approx \frac{1}{4N} \dell x x(1-x) \phi(x,t) 
+      & &\bigg\} \mathrm{drift}
+      \nonumber \\ 
+      &- s \del x [h + ( 1 - 2h)x]x(1-x) \phi(x,t) 
+      & &\bigg\} \mathrm{selection}
+      \nonumber \\
+      &+ 2Nu\delta\left( x - \frac{1}{2N}\right)
+      & &\bigg\} \mathrm{mutation}
+    \end{align}
+  \end{block}
+\end{frame}
 
 \end{document}
