@@ -15,10 +15,14 @@
 \usepackage{bm}
 \usepackage{amsmath,amssymb}
 \usepackage{mathtools}
+
+
 \newcommand{\del}[1]{\ensuremath{\frac{\partial}{\partial #1}}}
 \newcommand{\dell}[1]{\ensuremath{\frac{\partial^2}{\partial #1^2}}}
 
 \def\Put(#1,#2)#3{\leavevmode\makebox(0,0){\put(#1,#2){#3}}}
+
+
 
 \title{Genetic load and efficacy of selection on admixed populations}
 \subtitle{A Diffusion Processes Approach}
@@ -154,7 +158,7 @@
     to the theoretical "perfectly adapted" genotype.
   \end{alertblock}
   \[
-    L = \frac{W_{max} - \overline W}{W_{max}}
+    L = \frac{W_{max} - W}{W_{max}}
   \]
   Causes:
   \begin{itemize}
@@ -166,25 +170,46 @@
 \end{frame}
 
 \begin{frame}{Equilibrium Rationale}
+  \begin{columns}
+  \begin{column}{0.65\textwidth}
+    \centering
+    \begin{footnotesize}
+      \begin{tabular}{cccc}
+        \\ \hline
+        Genotype & aa & aA & AA \\
+        Frequency & $(1 - x) ^2$ & $2 x ( 1 - x)$ & $x^2$ \\
+        Average Fitness & 1 & $1 - h s$ & $1 - s$ \\
+        Mutation Rate & $ a \xrightleftharpoons[u]{v} A $ & \\
+        \hline
+      \end{tabular}
+    \end{footnotesize}
+    \includegraphics[width=\textwidth]{./Figures/Kimura_1963.png}
+  \end{column}
+  \begin{column}{0.35\textwidth}
+    \begin{scriptsize}
+      \begin{tabular}{l}
+      Fitness \\ 
+      $W(x) = 1 - 2 hs x(1 - x) - s x^2$ \\
+      Eq. dist. of $x$ \\ 
+      $\phi(x) = C W^{2N} x^{4Nu -1 }(1 - x)^{4Nv - 1}$  \\
+      Genetic load \\ 
+      $\overline L = \frac{\int_0^1 dx (1 - W)\phi(x)}{\int_0^1 dx \phi(x)}$
+      \end{tabular}
+    \end{scriptsize}
 
-\begin{minipage}{0.7\textwidth}
-  \centering
-  \begin{footnotesize}
-    \begin{tabular}{cccc}
-      \hline
-      Genotype & aa & aA & AA \\
-      Frequency & $(1 - x) ^2$ & $2 x ( 1 - x)$ & $x^2$ \\
-      Average Fitness & 1 & $1 - h s$ & $1 - s$ \\
-      Mutation Rate & $ a \xrightleftharpoons[u]{v} A $ & \\
-      \hline
-    \end{tabular}
-
-  \[
-    \overline W = 1 - 2 hs x(1 -x) - s x^2
-  \]
-  \end{footnotesize}
-  \includegraphics[width=\textwidth]{./Figures/Kimura_1963.png}
-\end{minipage}
+    \begin{block}{Small Populations}
+      Load is high since drift increases the frequency of deleterious
+      mutations.
+    \end{block}
+    \begin{block}{Large Populations}
+      Selection decreases the genetic load.\\
+      $\overline L \propto u$
+    \end{block}
+  \end{column}
+  \end{columns}
+  \let\thefootnote\relax\footnote{
+    \scriptsize M. Kimura, T. Maruyama \& J. Crow; The
+    Mutation Load in Small Populations. Genetics (1963)}
 \end{frame}
 
 \begin{frame}{\normalsize There are differences in mutation load between human
@@ -214,7 +239,6 @@
   \begin{alertblock}{Definition}
     The efficacy of selection is defined as the contribution of selection on
     the population load change $\partial L / \partial t$.  
-  \end{alertblock}
   \begin{align}
     \dot W &= \dot W_u + \dot W_N + \dot W_s
     \nonumber \\
@@ -224,10 +248,19 @@
     \underbrace{\frac{s}{2}[h\Gamma_{1,h}+(1-2h)\Gamma_{2,h}}_\text{selection}]
       \big\}
   \end{align}
+  \end{alertblock}
+  where $\Gamma_{i,h} = 4h(\mu_i - \mu_{i + 1}) + 
+  4(1 - 2h)(\mu_{i+1} - \mu_{i + 2})$ and $\pi_1=\Gamma_{1,1/2}$
+
+  \begin{block}{Efficacy of Selection}
+    \[
+      W_s = \frac{s^2}{2}[h\Gamma_{1,h}+(1-2h)\Gamma_{2,h}]
+    \] 
+  \end{block}
 \end{frame}
 
 \begin{frame}{Derivation outline}
-  \begin{block}{Diffusion Aproximation}
+  \begin{block}{Diffusion Approximation}
     Let $\phi(x,t)dx$ the expected number of alleles with frequency between $x$
     and $x + dx$ at time $t$.
     \begin{align}
@@ -237,10 +270,11 @@
       &- s \del x [h + ( 1 - 2h)x]x(1-x) \phi(x,t) 
       & &\bigg\} \mathrm{selection}
       \nonumber \\
-      &+ 2Nu\delta\left( x - \frac{1}{2N}\right)
+      &+ 2Nu\delta\left(x - \frac{1}{2N}\right)
       & &\bigg\} \mathrm{mutation}
     \end{align}
   \end{block}
 \end{frame}
+
 
 \end{document}
