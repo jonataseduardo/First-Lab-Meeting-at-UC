@@ -16,7 +16,6 @@
 \usepackage{amsmath,amssymb}
 \usepackage{mathtools}
 
-
 \newcommand{\del}[1]{\ensuremath{\frac{\partial}{\partial #1}}}
 \newcommand{\dell}[1]{\ensuremath{\frac{\partial^2}{\partial #1^2}}}
 
@@ -43,14 +42,29 @@
 
 \section{Quick Bio}
 
-\begin{frame}{Statistical Mechanics of Interacting Bayesian Agents: Applications
+\begin{frame}{\normalsize Statistical Mechanics of Interacting Bayesian Agents: Applications
     to Moral Foundation Theory}
-  \begin{itemize}
-      \item $\bm \omega_i$: agent moral vector 
-      \item $\bm x$: random issues 
-      \item $\mathcal H$: Cost of disagreement between agents
-  \end{itemize}
   
+  \footnotesize
+  \begin{columns}
+    \begin{column}{0.65\textwidth}
+      \begin{alertblock}{MFT}
+        \begin{itemize}
+          \item Moral Matrix: \textit{Harm, Fairness, Ingroup, Authority, Purity}
+          \item Liberals are most sensitive to Harm and Fairness while
+            Conservatives are equally sensitive to all 5 moral dimensions
+        \end{itemize}
+      \end{alertblock}
+    \end{column}
+    \begin{column}{0.45\textwidth}
+      \begin{itemize}
+          \item $\bm \omega_i$: agent moral vector 
+          \item $\bm x$: random issues 
+          \item $\mathcal H$: Cost of disagreement between agents
+      \end{itemize}
+    \end{column}
+  \end{columns}
+  \centering 
   Socio-dynamic sketch:
   \[
     \bm \omega_i^{t + 1} = \bm \omega_i^{t} + 
@@ -61,7 +75,7 @@
   \includegraphics[width=0.45\textwidth]{./Figures/mf_usa}
   \hspace{5pt}
   \includegraphics[width=0.45\textwidth]{./Figures/beta_tight.pdf}
-  \let\thefootnote\relax\footnote{J. Cesar and N. Caticha, in prep}
+  \let\thefootnote\relax\footnote{\tiny J. Cesar and N. Caticha, in prep}
 \end{frame}
 
 \begin{frame}{SUVREL: Supervised Variational Relevance Learning}
@@ -110,7 +124,8 @@
   \begin{minipage}{0.45\textwidth}
   \includegraphics[width=\textwidth]{./Figures/correlations.png}
   \end{minipage}
-
+\let\thefootnote\relax\footnote{V. Aguiar, J. Cesar, O. Deleanau, E.
+  Dermitzaskis, D. Meyer. under review}
 \end{frame}
 
 \begin{frame}{\small The effect of balancing selection on population
@@ -239,6 +254,47 @@
   \begin{alertblock}{Definition}
     The efficacy of selection is defined as the contribution of selection on
     the population load change $\partial L / \partial t$.  
+  \end{alertblock}
+  \begin{block}{Derivation}
+    Given the avarege fitness $W = s[2h\mu_1 + (1 - 2h)\mu_2]$ where
+    $\mu_k \equiv \int_0^1 dx x^k \phi(x, t)$ we want to calculate 
+    \[
+      \frac{d}{dt} W= s[2h \dot \mu_1 + (1 - 2h) \dot \mu_2]
+    \]
+  \end{block}
+  using: 
+  $\dot \mu_k = \del t \int_0^1 dx x^k \phi(x, t) = \int_0^1 dx x^k \del t \phi(x, t)$
+  \let\thefootnote\relax\footnote{S. Gravel, Genetics 2016}
+\end{frame}
+
+\begin{frame}{Derivation outline}
+  \begin{alertblock}{Diffusion Approximation}
+    Let $\phi(x,t)dx$ the expected number of alleles with frequency between $x$
+    and $x + dx$ at time $t$.
+    \begin{align}
+      \del t \phi(x,t) & \approx \frac{1}{4N} \dell x x(1-x) \phi(x,t) 
+      & &\bigg\} \mathrm{drift}
+      \nonumber \\ 
+      &- s \del x [h + ( 1 - 2h)x]x(1-x) \phi(x,t) 
+      & &\bigg\} \mathrm{selection}
+      \nonumber \\
+      &+ 2Nu\delta\left(x - \frac{1}{2N}\right)
+      & &\bigg\} \mathrm{mutation}
+    \end{align}
+  \end{alertblock}
+  \begin{block}{Change in moments ($ k > 0$)}
+    \[
+      \dot \mu_k = \frac{k(k-1)}{8n} \pi_{k-1} + 
+        \frac{sk}{4} \Gamma_{k,h} +
+        \frac{u}{(2N)^{k-1}}
+    \]
+    where $\Gamma_{k,h} = 2[h\pi_k + (1 - 2h) \pi_{k+1}]$ and $\pi_k=(\mu_k - \mu_{k + 1})$
+  \end{block}
+  \let\thefootnote\relax\footnote{S. Gravel, Genetics 2016}
+\end{frame}
+
+\begin{frame}{Single Population Efficacy of Selection}
+  \begin{block}{Change in Fitness}
   \begin{align}
     \dot W &= \dot W_u + \dot W_N + \dot W_s
     \nonumber \\
@@ -248,32 +304,51 @@
     \underbrace{\frac{s}{2}[h\Gamma_{1,h}+(1-2h)\Gamma_{2,h}}_\text{selection}]
       \big\}
   \end{align}
-  \end{alertblock}
-  where $\Gamma_{i,h} = 4h(\mu_i - \mu_{i + 1}) + 
-  4(1 - 2h)(\mu_{i+1} - \mu_{i + 2})$ and $\pi_1=\Gamma_{1,1/2}$
-
-  \begin{block}{Efficacy of Selection}
-    \[
-      W_s = \frac{s^2}{2}[h\Gamma_{1,h}+(1-2h)\Gamma_{2,h}]
-    \] 
   \end{block}
 \end{frame}
 
-\begin{frame}{Derivation outline}
-  \begin{block}{Diffusion Approximation}
-    Let $\phi(x,t)dx$ the expected number of alleles with frequency between $x$
-    and $x + dx$ at time $t$.
-    \begin{align}
-      \del x \phi(x,t) & \approx \frac{1}{4N} \dell x x(1-x) \phi(x,t) 
-      & &\bigg\} \mathrm{drift}
-      \nonumber \\ 
-      &- s \del x [h + ( 1 - 2h)x]x(1-x) \phi(x,t) 
-      & &\bigg\} \mathrm{selection}
-      \nonumber \\
-      &+ 2Nu\delta\left(x - \frac{1}{2N}\right)
-      & &\bigg\} \mathrm{mutation}
-    \end{align}
-  \end{block}
+\begin{frame}{\normalsize Efficacy of selection of Admixed populations} 
+  \vfill
+  \centering
+  \[
+    \dot W_{s,admix} > \sum_i p_i \dot W_{s,i}
+  \]
+  \includegraphics[width=0.8\textwidth]{./Figures/Gravel_efsel_admix.png}
+  \let\thefootnote\relax\footnote{S. Gravel, Genetics 2016}
+\end{frame}
+
+\begin{frame}{Single Pulse Admixture}
+
+\begin{alertblock}{Allele Frequency Distribution}
+  \[
+    \phi(x_3) = \int_0^1 \int_0^1 dx_1 dx_2 \phi(x_1, x_2) 
+    \delta(x_3 - \alpha_1 x_1 - \alpha_2 x_2) 
+  \] 
+\end{alertblock}
+
+\begin{block}{Moments of The Admixed Population}
+  \begin{align}
+    \mu_{3,k} &= \int_0^1 \int_0^1\int_0^1dx_1 dx_2 dx_3 x_3^k \phi(x_1, x_2) 
+    \delta(x_3 - \alpha_1 x_1 - \alpha_2 x_2)
+    \nonumber \\
+    &= \int_0^1 \int_0^1dx_1 dx_2 (\alpha_1 x_1 +  \alpha_2 x_2) ^k \phi(x_1, x_2)
+    \nonumber \\
+    &= \sum_{j=1}^k\binom{j}{k} \alpha_1^j\alpha_2^{k -j} 
+    \int_0^1 \int_0^1dx_1 dx_2 x_1^jx_2^{k -j} \phi(x_1, x_2)
+    \nonumber \\
+    &= \sum_{j=1}^k\binom{j}{k} \alpha_1^j\alpha_2^{k -j} 
+    \mu_{j,k-j}^{1,2}
+  \end{align}
+\end{block}
+  
+\end{frame}
+
+\begin{frame}{\normalsize Present day efficacy
+    of selection - CADD > 2} 
+  \vfill
+  \centering
+  \includegraphics[width=0.8\textwidth]{./Figures/Gravel_efsel_CADD.png}
+  \let\thefootnote\relax\footnote{S. Gravel, Genetics 2016}
 \end{frame}
 
 \end{document}
